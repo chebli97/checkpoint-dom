@@ -1,55 +1,150 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const products = document.querySelectorAll('.card'); // Select all product cards
+document.addEventListener('DOMContentLoaded' , () => {
+    const products = document.querySelectorAll('.card')
+    products.forEach((product) => {
+        let plusButton = product.querySelector('.fa-plus-circle')
+        let minusButton = product.querySelector('.fa-minus-circle')
+        let heartButton = product.querySelector('.fa-heart')
+        let deleteButton = product.querySelector('.fa-trash-alt')
+        let quantityElement = product.querySelector('.quantity')
+        let totalPriceElement = document.querySelector('.total')
+       
+        let quantity = Number(quantityElement.textContent)
 
-    products.forEach(product => {
-        const plusBtn = product.querySelector('.fa-plus-circle');
-        const minusBtn = product.querySelector('.fa-minus-circle');
-        const trashBtn = product.querySelector('.fa-trash-alt');
-        const heartBtn = product.querySelector('.fa-heart');
-        const quantityElement = product.querySelector('.quantity');
-        const unitPriceElement = product.querySelector('.unit-price');
-        const totalPriceElement = document.querySelector('.total');
 
-        let unitPrice = parseFloat(unitPriceElement.textContent.replace('$', '').trim());
-        let quantity = parseInt(quantityElement.textContent);
-
-        // Function to update total price
-        function updateTotalPrice() {
+        const updateTotal = () => {
             let total = 0;
-            products.forEach(prod => {
-                const prodQuantity = parseInt(prod.querySelector('.quantity').textContent);
-                const prodUnitPrice = parseFloat(prod.querySelector('.unit-price').textContent.replace('$', '').trim());
-                total += prodQuantity * prodUnitPrice;
-            });
-            totalPriceElement.textContent = total.toFixed(2) + ' $';
+                         products.forEach(prod => {
+            const prodQuantity = parseInt(prod.querySelector('.quantity').textContent);
+                             const prodUnitPrice = parseFloat(prod.querySelector('.unit-price').textContent.replace('$', '').trim());
+                             total += prodQuantity * prodUnitPrice;
+                         });
+                         totalPriceElement.textContent = total.toFixed(2) + ' $';
         }
 
-        // Plus button click event
-        plusBtn.addEventListener('click', function() {
-            quantity++;
-            quantityElement.textContent = quantity;
-            updateTotalPrice();
-        });
+        //Quantity from Plus Btn
+        plusButton.addEventListener('click' , ()=>{
+            quantity++
+            quantityElement.textContent = quantity
+            updateTotal()
+        })
 
-        // Minus button click event
-        minusBtn.addEventListener('click', function() {
-            if (quantity > 0) {
-                quantity--;
-                quantityElement.textContent = quantity;
-                updateTotalPrice();
+         //Quantity from Minus Btn
+         minusButton.addEventListener('click' , ()=>{
+            if(quantity > 0){
+                quantity--
+                quantityElement.textContent = quantity
+                updateTotal()
             }
-        });
+        })
 
-        // Trash button click event
-        trashBtn.addEventListener('click', function() {
-            product.remove(); 
-            updateTotalPrice();
-        });
+        //Like Button
+        heartButton.addEventListener('click' , () =>{
+            heartButton.classList.toggle('liked')
+        })
 
-        // Heart button click event (toggle class to change color)
-        heartBtn.addEventListener('click', function() {
-            heartBtn.classList.toggle('liked'); 
-        });
-       
-    });
-});
+        // Delete Button
+        deleteButton.addEventListener('click' , () =>{
+            product.remove()
+            updateTotal()
+        })
+
+
+
+
+    } )
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
